@@ -14,16 +14,21 @@
         
       <input type="submit" id="submit-project" value="Add">
     </form>
+
+
     <form class="add-activity hide">
-      <label for="project-list">
-        Project
-      </label>
       <select id="project-list" name="project-list">
       </select>
       <input type="text" id="title" name="title" placeholder="Title">
-      <input type="text" id="due-date" name="due-date" placeholder="Due Date">
       <input type="text" id="description" name="description" placeholder="Description">
-      <input type="text" id="priority" name="priority" placeholder="Priority">
+      <input type="date" id="due-date" name="due-date" value="2017-06-01">
+
+      <select id="priority-list" name="priority-list">
+        <option value="low">Low</option>
+        <option value="normal">Normal</option>
+        <option value="high">High</option>
+      </select>
+
       <input type="submit" id="submit-activity" value="Add">
     </form>
     <h2>Todo List</h2>
