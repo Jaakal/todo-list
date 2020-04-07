@@ -14,7 +14,7 @@ import todoCard from './todo-card';
 import projectCard from './project';
 
 const projects = [];
-const activities = [];
+let activities = [];
 
 let currentCard;
 
@@ -38,6 +38,7 @@ const displayCards = () => {
   }
 
   $('.edit-button').click(editActivity);
+  $('.delete-button').click(removeActivity);
 }
 
 const addProject = (event) => {
@@ -58,7 +59,6 @@ const submitProject = (event) => {
 
 const addActivity = () => {
   currentCard = todoCard();
-  activities.push(currentCard);
 
   $('.add-project').addClass('hide');
   $('.add-activity').removeClass('hide');
@@ -69,16 +69,27 @@ const submitActivity = (event) => {
   $('.add-activity').addClass('hide');
 
   const activityData = $('.add-activity').serializeArray();
+  let currentIndex = currentCard.getIndex();
+  if (currentIndex === undefined) {
+    currentIndex = activities.length;
+    activities.push(currentCard);
+  }
 
   const cardData = [projects[activityData[0].value], 
                     activityData[1].value, 
                     activityData[2].value, 
                     activityData[3].value, 
                     activityData[4].value.charAt(0).toUpperCase()  + activityData[4].value.slice(1), 
-                    activities.length
+                    currentIndex
                    ];
 
+
   currentCard.setCard(cardData);
+  //console.log(JSON.stringify(currentCard.getLiteral()));
+  const literalArray = activities.map((card) => {
+    return card = card.getLiteral();
+  });
+  localStorage.setItem("activities", JSON.stringify(literalArray))
   displayCards();
 }
 
@@ -141,9 +152,16 @@ $(document).ready(() => {
     activities.length
   ];
 
-  todo.setCard(cardData);
-  activities.push(todo);
-
+  let localStorageCards = JSON.parse(localStorage.getItem("activities") || "[]");
+  localStorageCards = localStorageCards.map((card) => {
+    let _todoCard = todoCard();
+    _todoCard.setCardByLiteral(card);
+    return card = _todoCard;
+  })
+  activities = localStorageCards;
+  //todo.setCard(cardData);
+  //activities.push(todo);
+  //console.log(activities);
   displayCards();
   // $('.todo-table').append(card.getHTML());
 });

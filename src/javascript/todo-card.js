@@ -16,12 +16,22 @@ const todoCard = () => {
     priority = data[4];
     index = data[5];
   }
+
+  const setCardByLiteral = (data) => {
+    project = data.project;
+    title = data.title;
+    description = data.description;
+    dueDate = data.dueDate;
+    priority = data.priority;
+    index = data.index;
+  }
   
   const getProject = () => project
   const getTitle = () => title
   const getDueDate = () => dueDate  
   const getDescription = () => description
   const getPriority = () => priority
+  const getIndex = () => index;
   
   const getHTML = () => {
     const htmlString = `
@@ -41,7 +51,11 @@ const todoCard = () => {
     return htmlString;
   }
 
-  return {setCard, getProject, getTitle, getDescription, getDueDate, getPriority, getHTML}
+  const getLiteral = () => {
+    return {project, title, description, dueDate, priority, index};
+  }
+
+  return {setCard, setCardByLiteral, getProject, getTitle, getDescription, getDueDate, getPriority, getHTML, getIndex, getLiteral}
 };
 
 export default todoCard;
