@@ -1,11 +1,21 @@
 import '../css/todo-card.scss';
 
-const todoCard = (() => {
-  const printCard = () => {
-    console.log('Card!');
+const todoCard = (project, title, description, dueDate, priority) => {
+  const htmlString = `
+    <tr>
+      <td>${project}</td>
+      <td>${title}</td>
+      <td>${description}</td>
+      <td>${dueDate}</td>
+      <td>${priority}</td>
+    </tr>
+  `;
+
+  const getHTML = () => {
+    return htmlString;
   }
 
-  return {printCard}
-})();
+  return {getHTML}
+};
 
 export default todoCard;

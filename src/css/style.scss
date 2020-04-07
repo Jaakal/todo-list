@@ -10,15 +10,17 @@
   font-style: normal;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100vw;
-  height: 100vh;
-  background-image: url('../images/restaurant.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-image: url('../images/restaurant.jpg');
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
 }

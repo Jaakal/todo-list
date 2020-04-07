@@ -8,5 +8,42 @@
   <script src="./dist/main.js"></script>
 </head>
 <body>
+  <div class="container">
+    <form class="add-project hide">
+      <input type="text" id="add-project" name="add-project" placeholder="Project">
+        
+      <input type="submit" id="submit-project" value="Add">
+    </form>
+    <form class="add-activity hide">
+        <input type="text" id="project" name="project" placeholder="Project name">
+        <input type="text" id="title" name="title" placeholder="Title">
+        <input type="text" id="due-date" name="due-date" placeholder="Due Date">
+        <input type="text" id="description" name="description" placeholder="Description">
+        <input type="text" id="priority" name="priority" placeholder="Priority">
+        
+        <input type="submit" id="submit-activity" value="Add">
+    </form>
+    <h2>Todo List</h2>
+    <div class="button-bar">
+      <button class="add-project-button">Add Project</button>
+      <button class="add-activity-button">Add Activity</button>
+    </div>
+    <table class="todo-table">
+      <tr>
+        <th>Project</th>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Description</th>
+        <th>Priority</th>
+      </tr>
+      <tr>
+        <td>Everyday Chores</td>
+        <td>Making your bed.</td>
+        <td>07.04.2020</td>
+        <td>Every morning first thing!</td>
+        <td>High</td>
+      </tr>
+    </table>
+  </div>
 </body>
 </html>
