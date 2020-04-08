@@ -6,6 +6,7 @@ const todoCard = () => {
   let dueDate = '';
   let description = ''; 
   let priority = '';
+  let status ='';
   let index;
 
   const setCard = (data) => {
@@ -14,7 +15,8 @@ const todoCard = () => {
     description = data[2];
     dueDate = data[3];
     priority = data[4];
-    index = data[5];
+    status = data[5];
+    index = data[6];
   }
 
   const setCardByLiteral = (data) => {
@@ -23,6 +25,7 @@ const todoCard = () => {
     description = data.description;
     dueDate = data.dueDate;
     priority = data.priority;
+    status = data.status;
     index = data.index;
   }
   
@@ -32,7 +35,8 @@ const todoCard = () => {
   const getDescription = () => description
   const getPriority = () => priority
   const getIndex = () => index;
-  
+  const getStatus = () => status;
+
   const getHTML = () => {
     const htmlString = `
       <tr>
@@ -40,7 +44,8 @@ const todoCard = () => {
         <td>${title}</td>
         <td>${description}</td>
         <td>${dueDate}</td>
-        <td>${priority}</td>
+        <td class="${priority.toLowerCase()}">${priority}</td>
+        <td class="${status.toLowerCase()}">${status}</td>
         <td>
           <button class="edit-button" data-index="${index}">Edit</button>
           <button class="delete-button" data-index="${index}">Delete</button>
@@ -52,10 +57,10 @@ const todoCard = () => {
   }
 
   const getLiteral = () => {
-    return {project, title, description, dueDate, priority, index};
+    return {project, title, description, dueDate, priority, status, index};
   }
 
-  return {setCard, setCardByLiteral, getProject, getTitle, getDescription, getDueDate, getPriority, getHTML, getIndex, getLiteral}
+  return {setCard, setCardByLiteral, getProject, getTitle, getDescription, getDueDate, getPriority, getHTML, getStatus, getIndex, getLiteral}
 };
 
 export default todoCard;

@@ -53,3 +53,23 @@ td {
 .hide {
   transform: translateY(-2000px);
 }
+
+.high {
+  color: red;
+}
+
+.low {
+  color: yellow;
+}
+
+.normal {
+  color: green;
+}
+
+.finished {
+  color: green;
+}
+
+.unfinished {
+  color: red;
+}
