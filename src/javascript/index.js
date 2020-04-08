@@ -64,6 +64,16 @@ const addActivity = () => {
   $('.add-activity').removeClass('hide');
 }
 
+const updateLocalStorage = () => {
+  const literalArray = activities.map((card) => {
+    if(card) {
+      return card = card.getLiteral();
+    }
+    return null;
+  });
+  localStorage.setItem("activities", JSON.stringify(literalArray));
+}
+
 const submitActivity = (event) => {
   event.preventDefault();
   $('.add-activity').addClass('hide');
@@ -85,11 +95,7 @@ const submitActivity = (event) => {
 
 
   currentCard.setCard(cardData);
-  //console.log(JSON.stringify(currentCard.getLiteral()));
-  const literalArray = activities.map((card) => {
-    return card = card.getLiteral();
-  });
-  localStorage.setItem("activities", JSON.stringify(literalArray))
+  updateLocalStorage();
   displayCards();
 }
 
@@ -108,6 +114,7 @@ const editActivity = (event) => {
 const removeActivity = (event) => {
   const card = activities[$(event.target).data('index')];
   activities[card.getIndex()] = null;
+  updateLocalStorage();
   displayCards();
 }
 
@@ -154,9 +161,12 @@ $(document).ready(() => {
 
   let localStorageCards = JSON.parse(localStorage.getItem("activities") || "[]");
   localStorageCards = localStorageCards.map((card) => {
-    let _todoCard = todoCard();
-    _todoCard.setCardByLiteral(card);
-    return card = _todoCard;
+    if(card){
+      let _todoCard = todoCard();
+      _todoCard.setCardByLiteral(card);
+      return card = _todoCard;
+    }
+    return null;
   })
   activities = localStorageCards;
   //todo.setCard(cardData);
