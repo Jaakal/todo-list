@@ -17,6 +17,7 @@ let projects = [];
 let activities = [];
 
 let _projectID;
+let _activityID;
 
 let currentCard;
 
@@ -32,26 +33,12 @@ const displayCards = (projectID) => {
     </tr>
   `);
 
-  
-  
   const filteredActivities = Number(projectID) !== -1 ? activities.filter((activity) => {
-    // console.log(activity);
-    if (activity) {
-      return activity.getProject().index === Number(projectID);
-    }
+    return activity.getProject().index === Number(projectID);
   }) : activities;
-
-  // const filteredActivities = Number(projectID) !== projects.length ? activities.filter((activity) => {
-  //   if (activity) {
-  //     return activity.getProject().index === Number(projectID)
-  //   }
-  // }) : activities;
   
-  for(let i = 0; i < filteredActivities.length; i += 1) {
-    const card = filteredActivities[i];
-    if (card) {
-      $('.todo-table').append(card.getHTML());
-    }
+  for (let i = 0; i < filteredActivities.length; i += 1) {
+    $('.todo-table').append(filteredActivities[i].getHTML());
   }
 
   $('.edit-button').click(editActivity);
@@ -73,20 +60,20 @@ const submitProject = (event) => {
   projects.push(project);
   $('#project-list').append(`<option value=${project.index}>${project.name}</option>`);
   $('#choose-project-list').append(`<option value=${project.index}>${project.name}</option>`);
-
-  localStorage.setItem("projects", JSON.stringify(projects));
   
   _projectID += 1;
-  localStorage.setItem("_projectsID", JSON.stringify(_projectID));
+
+  updateLocalStorage();
 }
 const updateLocalStorage = () => {
   const literalArray = activities.map((card) => {
-    if (card) {
-      return card.getLiteral();
-    }
-    return null;
+    return card.getLiteral();
   });
+
   localStorage.setItem("activities", JSON.stringify(literalArray));
+  localStorage.setItem("projects", JSON.stringify(projects));
+  localStorage.setItem("_projectsID", JSON.stringify(_projectID));
+  localStorage.setItem("_activityID", JSON.stringify(_activityID));
 }
 
 const addActivity = () => {
@@ -107,16 +94,15 @@ const submitActivity = (event) => {
   let displayCardsCurrentProject = $('#choose-project-list').val();
 
   if (currentIndex === undefined) {
-    currentIndex = activities.length;
+    currentIndex = _activityID;
     activities.push(currentCard);
     displayCardsCurrentProject = activityData[0].value;
+    _activityID += 1;
   }
 
   const filteredProject = projects.filter((project) => {
       return Number(project.index) === Number(activityData[0].value);
   })[0];
-
-  console.log(filteredProject);
 
   const cardData = [filteredProject, 
                     activityData[1].value, 
@@ -132,7 +118,17 @@ const submitActivity = (event) => {
 }
 
 const editActivity = (event) => {
-  currentCard = activities[$(event.target).data('index')];
+  currentCard = activities.filter((activity) => {
+    return activity.getIndex() === $(event.target).data('index');
+  })[0];
+
+  // activities.map((element, index) => {
+  //   if (element.getIndex() === $(event.target).data('index')) {
+  //     activities.splice(index, 1);
+  //   }
+  // });
+  
+  // currentCard = activities[$(event.target).data('index')];
 
   $('#project-list').val(currentCard.getProject().index);
   $('#title').val(currentCard.getTitle());
@@ -144,8 +140,12 @@ const editActivity = (event) => {
 }
 
 const removeActivity = (event) => {
-  const card = activities[$(event.target).data('index')];
-  activities[card.getIndex()] = null;
+  activities.map((element, index) => {
+    if (element.getIndex() === $(event.target).data('index')) {
+      activities.splice(index, 1);
+    }
+  });
+  
   updateLocalStorage();
   
   displayCards($('#choose-project-list').val());
@@ -164,27 +164,8 @@ $(document).ready(() => {
   
   $('#due-date').attr("value", `${date.getFullYear()}-${month}-${day}`);
 
-  let project = projectCard('Other projects', 0);
-  projects.push(project);
-  $('#project-list').append(`<option value=${project.index}>${project.name}</option>`);
-
-
-  _projectID = Number(localStorage.getItem("_projectsID"));
-  _projectID = _projectID || 0;
-
-  // console.log(_projectID);
-  // let localStorageProjects = JSON.parse(localStorage.getItem("projects") || "[]");
-  projects = JSON.parse(localStorage.getItem("projects") || "[]");
-  
-  $('#choose-project-list').append(`<option disabled selected value> -- select an option -- </option>`);
-  for(let i = 0; i < projects.length; i += 1) {
-    $('#choose-project-list').append(`<option value="${projects[i].index}">${projects[i].name}</option>`);
-  }
-  $('#choose-project-list').append(`<option value="${-1}">All the projects</option>`);
-
-  $('#choose-project-list').change(() => {
-    displayCards($('#choose-project-list').val());
-  });
+  _activityID = Number(localStorage.getItem("_activityID"));
+  _activityID = _activityID || 0;
 
   let localStorageCards = JSON.parse(localStorage.getItem("activities") || "[]");
 
@@ -198,15 +179,35 @@ $(document).ready(() => {
     return null;
   });
 
-  console.log(projects);
+  activities = localStorageCards;
 
-  for (let i = 0; i < localStorageCards.length; i++) {
-    if (localStorageCards[i]) {
-      console.log(localStorageCards[i].getProject().index);
-    }
+  _projectID = Number(localStorage.getItem("_projectsID"));
+  _projectID = _projectID || 1;
+  
+  projects = JSON.parse(localStorage.getItem("projects") || "[]");
+
+  let tempProjects = {'Other projects': projectCard('Other projects', 0)};
+  
+  for (let i = 0; i < activities.length; i += 1) {
+    tempProjects[activities[i].getProject().name] = activities[i].getProject();
   }
 
-  activities = localStorageCards;
+  projects = Object.values(tempProjects);
+  
+  updateLocalStorage();
+  
+  
+  $('#choose-project-list').append(`<option disabled selected value> -- select an option -- </option>`);
+  
+  for(let i = 0; i < projects.length; i += 1) {
+    $('#choose-project-list').append(`<option value="${projects[i].index}">${projects[i].name}</option>`);
+    $('#project-list').append(`<option value="${projects[i].index}">${projects[i].name}</option>`);
+  }
+  $('#choose-project-list').append(`<option value="${-1}">All the projects</option>`);
+
+  $('#choose-project-list').change(() => {
+    displayCards($('#choose-project-list').val());
+  });
   
   displayCards(-1);
 });
