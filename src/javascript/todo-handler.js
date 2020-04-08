@@ -38,7 +38,7 @@ const todoHandler = (() => {
     $('.delete-button').click(removeActivity);
   }
 
-  const editActivity = () => {
+  const editActivity = (event) => {
     currentCard = activities.filter((activity) => {
       return activity.getIndex() === $(event.target).data('index');
     })[0];
@@ -49,7 +49,7 @@ const todoHandler = (() => {
     $('#due-date').val(currentCard.getDueDate());
     $('#priority-list').val(currentCard.getPriority().toLowerCase());
     $('#status-list').val(currentCard.getStatus());
-    $('.add-activity').removeClass('hide');
+    $('.form-wrapper-activity').removeClass('hide');
   }
 
   const removeActivity = () => {
@@ -65,20 +65,25 @@ const todoHandler = (() => {
   }
 
   const addProject = () => {
-    $('.add-activity').addClass('hide');
-    $('.add-project').removeClass('hide');
+    $('.form-wrapper-activity').addClass('hide');
+    $('.form-wrapper-project').removeClass('hide');
   }
 
   const submitProject = (event) => {
     event.preventDefault();
 
-    $('.add-project').addClass('hide');
+    $('.form-wrapper-project').addClass('hide');
   
     const project = projectCard($('#add-project').val(), _projectID);
   
     projects.push(project);
     $('#project-list').append(`<option value=${project.index}>${project.name}</option>`);
-    $('#choose-project-list').append(`<option value=${project.index}>${project.name}</option>`);
+    
+    $('#choose-project-list').html(`<option disabled selected value> -- select an option -- </option>`);
+    for(let i = 0; i < projects.length; i += 1) {
+      $('#choose-project-list').append(`<option value="${projects[i].index}">${projects[i].name}</option>`);
+    }
+    $('#choose-project-list').append(`<option value="${-1}">All the projects</option>`);
     
     _projectID += 1;
   
@@ -88,13 +93,13 @@ const todoHandler = (() => {
   const addActivity = () => {
     currentCard = todoCard();
 
-    $('.add-project').addClass('hide');
-    $('.add-activity').removeClass('hide');
+    $('.form-wrapper-project').addClass('hide');
+    $('.form-wrapper-activity').removeClass('hide');
   }
 
   const submitActivity = () => {
     event.preventDefault();
-    $('.add-activity').addClass('hide');
+    $('.form-wrapper-activity').addClass('hide');
   
     const activityData = $('.add-activity').serializeArray();
     
@@ -126,9 +131,20 @@ const todoHandler = (() => {
     displayCards(displayCardsCurrentProject, activities);
   }
 
+  const closeForm = (event) => {
+    event.preventDefault();
+
+    if ($(event.currentTarget).data('button') === 'close-add-project') {
+      $('.form-wrapper-project').addClass('hide');
+    } else if ($(event.currentTarget).data('button') === 'close-add-activity') {
+      $('.form-wrapper-activity').addClass('hide');
+    }
+  }
+
   const start = () => {
     $('.add-project-button').click(addProject);
     $('.add-activity-button').click(addActivity);
+    $('.close-form').click(closeForm);
     
     $('.add-project').submit(submitProject);
     $('.add-activity').submit(submitActivity);

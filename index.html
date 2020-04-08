@@ -9,33 +9,47 @@
 </head>
 <body>
   <div class="container">
-    <form class="add-project hide">
-      <input type="text" id="add-project" name="add-project" placeholder="Project">
-        
-      <input type="submit" id="submit-project" value="Add">
-    </form>
+    <div class="form-wrapper-project hide">
+      <button class="close-form" data-button="close-add-project">
+        <span></span>
+        <span></span>
+      </button>
+      <form class="add-project">
+        <label for="">Add Project</label>
+        <input type="text" id="add-project" name="add-project" placeholder="Project">
+          
+        <input type="submit" id="submit-project" value="Add">
+      </form>
+    </div>
 
-
-    <form class="add-activity hide">
-      <select id="project-list" name="project-list">
-      </select>
-      <input type="text" id="title" name="title" placeholder="Title">
-      <input type="text" id="description" name="description" placeholder="Description">
-      <input type="date" id="due-date" name="due-date" value="2017-06-01">
-
-      <select id="priority-list" name="priority-list">
-        <option value="low">Low</option>
-        <option value="normal">Normal</option>
-        <option value="high">High</option>
-      </select>
-      <select id="status-list" name="status-list">
-        <option value="unfinished">Unfinished</option>
-        <option value="finished">Finished</option>
-      </select>
-
-      <input type="submit" id="submit-activity" value="Add">
-    </form>
-    <h2>Todo List</h2>
+    <div class="form-wrapper-activity hide">
+      <button class="close-form" data-button="close-add-activity">
+        <span></span>
+        <span></span>
+      </button>
+      <form class="add-activity">
+        <label for="">Add Activity</label>
+  
+        <select id="project-list" name="project-list">
+        </select>
+        <input type="text" id="title" name="title" placeholder="Title">
+        <input type="text" id="description" name="description" placeholder="Description">
+        <input type="date" id="due-date" name="due-date" value="2017-06-01">
+  
+        <select id="priority-list" name="priority-list">
+          <option value="low">Low</option>
+          <option value="normal">Normal</option>
+          <option value="high">High</option>
+        </select>
+        <select id="status-list" name="status-list">
+          <option value="unfinished">Unfinished</option>
+          <option value="finished">Finished</option>
+        </select>
+  
+        <input type="submit" id="submit-activity" value="Add">
+      </form>
+    </div>
+    <h1>Todo List</h1>
     <div class="button-bar">
       <select id="choose-project-list" name="choose-project-list">
       </select>
