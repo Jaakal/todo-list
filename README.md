@@ -4,7 +4,7 @@ Project, where you can add todos and group them into different projects. From th
 
 ## Screenshot
 
-![Screenshot of the webpage](https://github.com/Jaakal/todo-list/blob/master/src/images/screenshot.png)
+![Screenshot of the webpage](https://github.com/Jaakal/todo-list/blob/milestone1/src/images/screenshot.png)
 
 ## Getting Started
 
