@@ -15,7 +15,7 @@ const todoCard = () => {
 
   const setCardByLiteral = (data) => {
     ({
-      project, title, description, dueDate, priority, status, index
+      project, title, description, dueDate, priority, status, index,
     } = data);
   };
 
