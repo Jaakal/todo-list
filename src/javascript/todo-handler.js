@@ -169,7 +169,7 @@ const todoHandler = (() => {
 
     projects = JSON.parse(localStorageHandler.getItem('projects') || '[]');
 
-    const tempProjects = { 'Other groups': projectCard('Other groups', 0) };
+    const tempProjects = { 'Other todos': projectCard('Other todos', 0) };
 
     for (let i = 0; i < activities.length; i += 1) {
       tempProjects[activities[i].getProject().name] = activities[i].getProject();
