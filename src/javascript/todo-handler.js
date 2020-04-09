@@ -38,7 +38,7 @@ const todoHandler = (() => {
   displayCards = (projectID) => {
     $('.todo-table').html(`
     <tr>
-      <th>Project</th>
+      <th>Group</th>
       <th>Title</th>
       <th>Description</th>
       <th>Due Date</th>
@@ -75,11 +75,11 @@ const todoHandler = (() => {
     projects.push(project);
     $('#project-list').append(`<option value=${project.index}>${project.name}</option>`);
 
-    $('#choose-project-list').html('<option disabled selected value> -- select an option -- </option>');
+    $('#choose-project-list').html('<option disabled selected value> -- select a group -- </option>');
     for (let i = 0; i < projects.length; i += 1) {
       $('#choose-project-list').append(`<option value="${projects[i].index}">${projects[i].name}</option>`);
     }
-    $('#choose-project-list').append(`<option value="${-1}">All the projects</option>`);
+    $('#choose-project-list').append(`<option value="${-1}">All the groups</option>`);
 
     localProjectID += 1;
 
@@ -169,7 +169,7 @@ const todoHandler = (() => {
 
     projects = JSON.parse(localStorageHandler.getItem('projects') || '[]');
 
-    const tempProjects = { 'Other projects': projectCard('Other projects', 0) };
+    const tempProjects = { 'Other groups': projectCard('Other groups', 0) };
 
     for (let i = 0; i < activities.length; i += 1) {
       tempProjects[activities[i].getProject().name] = activities[i].getProject();
@@ -179,13 +179,13 @@ const todoHandler = (() => {
 
     localStorageHandler.update(activities, projects, localProjectID, localActivityID);
 
-    $('#choose-project-list').append('<option disabled selected value> -- select an option -- </option>');
+    $('#choose-project-list').append('<option disabled selected value> -- select a group -- </option>');
 
     for (let i = 0; i < projects.length; i += 1) {
       $('#choose-project-list').append(`<option value="${projects[i].index}">${projects[i].name}</option>`);
       $('#project-list').append(`<option value="${projects[i].index}">${projects[i].name}</option>`);
     }
-    $('#choose-project-list').append(`<option value="${-1}">All the projects</option>`);
+    $('#choose-project-list').append(`<option value="${-1}">All the groups</option>`);
 
     $('#choose-project-list').change(() => {
       displayCards($('#choose-project-list').val());
