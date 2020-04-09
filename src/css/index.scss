@@ -1,14 +1,38 @@
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+  }
+  
+  @return $number;
+}
+
+@function min($number1, $number2) {
+  @if strip-unit($number1) < strip-unit($number2) {
+    @return $number1;
+  }
+
+  @return $number2;
+}
+
+@function max($number1, $number2) {
+  @if strip-unit($number1) > strip-unit($number2) {
+    @return $number1;
+  }
+
+  @return $number2;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  font-size: 40px;
+  font-size: 0.015 * 100vw;
 }
 
 h1 {
-  margin: 50px 0;
-  font-size: 50px;
+  margin: 0.02 * 100vw 0;
+  font-size: 0.02 * 100vw;
 }
 
 .button-bar {
@@ -17,14 +41,14 @@ h1 {
   justify-content: center;
   position: relative;
   width: 100%;
-  padding: 40px;
+  padding: 0.015 * 100vw;
   border: 1px solid black;
   background-color: rgba(0, 0, 0, 0.05);
 
   select {
     padding: 5px;
-    margin: 20px 0;
-    font-size: 25px;
+    margin: 0.01 * 100vw;
+    font-size: 0.01 * 100vw;
 
     &:hover {
       cursor: pointer;
@@ -32,9 +56,9 @@ h1 {
   }
 
   button {
-    font-size: 30px;
+    font-size: 0.015 * 100vw;;
     border: 1px solid black;
-    margin: 20px 50px;
+    margin: 0.01 * 100vw 0.02 * 100vw;
     border-radius: 4px;
 
     &:hover {
@@ -45,7 +69,7 @@ h1 {
 
 #choose-project-list {
   position: absolute;
-  left: 40px;
+  left: 0.015 * 100vw;
   transform: translateY(-50%);
 }
 
@@ -124,7 +148,7 @@ h1 {
 
 .edit-button,
 .delete-button {
-  font-size: 30px;
+  font-size: 0.012 * 100vw;
   border: 1px solid black;
   border-radius: 4px;
 
@@ -138,12 +162,12 @@ table, th, td {
 }
 
 th {
-  padding: 40px;
+  padding: 0.015 * 100vw;
   color: rebeccapurple;
 }
 
 td {
-  padding: 40px;
+  padding: 0.015 * 100vw;
 }
 
 .hide {
