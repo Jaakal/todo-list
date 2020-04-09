@@ -1,5 +1,3 @@
-const project = (name, index) => {
-  return {name, index};
-}
+const project = (name, index) => ({ name, index });
 
 export default project;
