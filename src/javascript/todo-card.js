@@ -14,13 +14,9 @@ const todoCard = () => {
   };
 
   const setCardByLiteral = (data) => {
-    project = data.project;
-    title = data.title;
-    description = data.description;
-    dueDate = data.dueDate;
-    priority = data.priority;
-    status = data.status;
-    index = data.index;
+    ({
+      project, title, description, dueDate, priority, status, index 
+    } = data);
   };
 
   const getProject = () => project;
