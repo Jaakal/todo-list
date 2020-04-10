@@ -1,10 +1,10 @@
 # Todo List
 
-Project template for using Webpack as the bundler for a project. Set up with Babel-, SCSS/CSS-, image- and font-loaders. jQuery module is added as well and included globally. I'm using jQuery function `$(document).ready(() => {})` in different modules do describe, in which order the final bundle is composed to together, because that function is executed in multiple bindings in the order it was attached.
+Project, where you can add todos and group them into different projects. From the left select-box you can choose which group todos you would like to see. To add a new group, you will first have to press the `Add Group` button and the form for doing that will be displayed and then you can add a new activity to that group pressing the `Add Activity` button. To add a new todo, you'll have to press the `Add Activity` button and the form for doing that will be displayed. In order to edit the todo, correct some typo or change the status later on, you'll have to press the `Edit` button on the corresponding todo, and the form will be displayed, which is filled with the current todo values. For deleting the todo, you'll have to press the `Delete` button of the corresponding todo. In every initial load or refresh of the page, all the empty groups are removed from the group list.
 
 ## Screenshot
 
-![Screenshot of the webpage](https://github.com/Jaakal/webpack-template/blob/master/src/images/screenshot.png)
+![Screenshot of the webpage](https://github.com/Jaakal/todo-list/blob/milestone1/src/images/screenshot.png)
 
 ## Getting Started
 
@@ -102,7 +102,7 @@ if(process.env.NODE_ENV === 'production') {
 
 👤 **Jaak Kivinukk**
 
-<a href="https://github.com/Jaakal" target="_blank">
+<a href="https://github.com/Jaakal" rel="noopener noreferrer" target="_blank">
 
   ![Screenshot Image](src/images/jaak-profile.png) 
 
@@ -113,6 +113,19 @@ if(process.env.NODE_ENV === 'production') {
 - Linkedin: [Jaak Kivinukk](https://www.linkedin.com/in/jaak-kivinukk)
 - Email: [jaak.kivinukk@gmail.com](jaak.kivinukk@gmail.com)
 
+👤 **Vinicius Campos Carvalho**
+
+<a href="https://github.com/kazumaki" rel="noopener noreferrer" target="_blank">
+
+  ![Screenshot Image](src/images/vinicius-profile.png) 
+
+</a>
+
+- Github: [@kazumaki](https://github.com/kazumaki)
+- Twitter: [@iKazumaki](https://twitter.com/iKazumaki)
+- Linkedin: [Vinicius Campos Carvalho](https://www.linkedin.com/in/vcamposcarvalho/)
+- Email: [vcampos.pitangui@gmail.com](vcampos.pitangui@gmail.com)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
@@ -121,5 +134,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 * Article [How to configure Webpack 4 from scratch for a basic website](https://dev.to/pixelgoo/how-to-configure-webpack-from-scratch-for-a-basic-website-46a5) used as a reference.
 * Video tutorial in [Youtube](https://www.youtube.com/watch?v=ytRnPV0kRN0) used as a reference.
-* Font [Lobster](https://fonts.google.com/specimen/Lobster) used for the main headline.
-* Link to the [background image](https://unsplash.com/photos/nmpW_WwwVSc).

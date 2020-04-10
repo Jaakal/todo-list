@@ -5,14 +5,12 @@ import '../css/index.scss';
 /**
  * JavaScript module requirers have to be below the stylesheet imports.
  * Otherwise stylesheets which will come with other modules
- * will be added before the main stylesheets. 
- * **/ 
+ * will be added before the main stylesheets.
+ * * */
 
 import $ from 'jquery';
-
-import todoCard from './todo-card';
+import todoHandler from './todo-handler';
 
 $(document).ready(() => {
-  todoCard.printCard();
+  todoHandler.start();
 });
-
